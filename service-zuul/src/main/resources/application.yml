@@ -1,0 +1,39 @@
+server:
+  port: 6001
+
+
+spring:
+  application:
+    name: service-zuul-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/,http://localhost:7003/eureka/
+    healthcheck:
+      enabled: true
+
+  instance:
+    instance-id: zuul网关服务-6001  # 人性化显示出服务的信息
+    prefer-ip-address: true  # 访问路径可显示ip地址
+    lease-renewal-interval-in-seconds: 2    # 心跳发发送频率，指定续约更新频率
+    lease-expiration-duration-in-seconds: 5 # 设置过期剔除时间（单位秒）
+
+
+
+# 使用actuator来展示项目的基本信息
+info:
+  author.name: shengwu ni
+  app.name: microservice
+  server.port: ${server.port}
+  application.name: ${spring.application.name}
+
+# 配置路由规则
+zuul:
+  ignored-services: service-order  # 不允许用微服务名访问了，如果禁用所有的，可以使用 "*"
+  routes:
+    prefix: /zuul # 给路由加一个统一的前缀
+    # 如下指定新的映射
+    order:
+      serviceId: service-order
+      path: /order/**

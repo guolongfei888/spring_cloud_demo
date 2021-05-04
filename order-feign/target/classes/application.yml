@@ -1,0 +1,32 @@
+server:
+  port: 9001
+
+
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka,http://localhost:7003/eureka
+
+# feign和ribbon结合，指定策略。feign默认的是轮询的策略，这里的配置可以自定义
+SERVICE-ORDER:
+  ribbon:
+    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #配置规则 随机
+    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #配置规则 轮询
+    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RetryRule #配置规则 重试
+    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule #配置规则 响应时间权重
+    # 我们也可以指定为其他策略，包括我们自己定义的，只要把相应的包路径写到这即可。
+     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+    # ConnectTimeout: 500 #请求连接超时时间
+    # ReadTimeout: 1000 #请求处理的超时时间
+    # OkToRetryOnAllOperations: true #对所有请求都进行重试
+    # MaxAutoRetriesNextServer: 2 #切换实例的重试次数
+    # MaxAutoRetries: 1 #对当前实例的重试次数
+
+
+
+# 开启熔断
+feign:
+  hystrix:
+    enabled: true

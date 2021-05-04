@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="order-consumer-hystrix-dashboard" />
+        <module name="order-feign" />
+        <module name="order-provider01-hystrix" />
+        <module name="service-common" />
+        <module name="order-provider03" />
+        <module name="order-provider02" />
+        <module name="order-provider01" />
+        <module name="service-zuul" />
+        <module name="order-provider01-hystrix-zdy" />
+        <module name="eureka03" />
+        <module name="eureka02" />
+        <module name="eureka01" />
+        <module name="order-consumer01" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="untitled" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

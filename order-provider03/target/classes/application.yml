@@ -1,0 +1,52 @@
+server:
+  port: 8003
+
+# 数据库地址
+datasource:
+  url: localhost:3306/spring_cloud_03
+
+spring:
+  application:
+    name: service-order  # 对外暴露的服务名称
+
+
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://${datasource.url}?characterEncoding=utf-8&useSSL=true&serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    hikari:
+      maximum-pool-size: 10 # 最大连接池数
+      max-lifetime: 1770000
+
+# 开启驼峰命名
+mybatis:
+  # 指定别名设置的包为所有entity
+  type-aliases-package: com.common.pojo
+  mapper-locations: # mapper映射文件位置
+    - classpath:mapper/*.xml
+  configuration:
+    # 驼峰命名规范
+    map-underscore-to-camel-case: true
+
+
+
+
+# 客户端注册进eureka服务列表里
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/,http://localhost:7003/eureka/
+  instance:
+    instance-id: 订单服务-8003 # 人性化显示服务的信息
+    prefer-ip-address: true   # 访问路径可显示IP地址
+
+
+
+# 用来展示项目的基本信息
+info:
+  author.name: shengwu ni
+  app.name: service
+  server.port: ${server.port}
+  application.name: ${spring.application.name}
